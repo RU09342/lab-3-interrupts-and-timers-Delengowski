@@ -1,3 +1,13 @@
+# Timer A Blink 
+## Goal
+To contorl the blinking of LEDs using timer modules and ISR as opposed to polling. The benefit of using the Timers is that they allow power savings by utilizing subroutines and low power modes. This power savings is the real beauty of the MSP430 line.
+## Code
+This lab was implemented using TimerA (except for the FR2311, which only has a TimerB) in up mode to compare against CCR0. When TA reaches the value of CCR0, LED1 is toggled (using XOR) if LED1 is on from this toggle, a variable gets incremented. Once this variable reaches the value of 5 (which would take TA hitting CCRO 10 times), LED2 is toggled. So, the second LED blinks at 1/10th the speed of the first. 
+
+In some of my code, you will see an attempt to change the frequency of the LED by adjusting CCR0. This was done using a function call and button interrupts that incremented a variable when pressed. This variable was the arugment to the function. This didn't work however, I believe its because the boards cannot do division in real time (at least the way I implemented). It never seemed to work. Regardless, you can still pick the frequency by setting the value of "frequency _ count" variable at the top of the code. It will be 32768/(frequency _ count) as the value of CCR0. 
+
+
+## original 
 # TIMER A Blink
 The TIMER peripherals can be used in many situations thanks to it flexibility in features. For this lab, you will be only scratching the surface as to what this peripheral can do. 
 
